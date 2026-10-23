@@ -3,9 +3,9 @@
 **Readiness: 20% — initial result-validation contract, not integrated callbacks.**
 
 ## Implemented on development
-- Typed operation result with request/correlation identity, source/target, operation, state, conclusion, run ID, head SHA, evidence URL, and UTC observation time.
+- Typed operation result with request/correlation/idempotency identity, contract version, source/target, operation, state, conclusion, run ID, head SHA, evidence URL, and UTC observation time.
 - Known outcome vocabulary: pending, succeeded, failed, rejected, stale, unknown.
-- Coordinator-supplied expected identity prevents callback-controlled correlation.
+- Coordinator-supplied expected identity validates request ID, correlation ID, idempotency key, contract version, source, target, and operation; callback-controlled identity is not trusted.
 - Success requires a success conclusion, positive run ID, 40-hex commit SHA, and exact GitHub Actions evidence URL for the claimed target/run.
 - Offline tests cover valid success, mismatched correlation/target, foreign evidence host, malformed SHA, conflicting conclusion, unknown state, and explicit unknown outcome.
 
