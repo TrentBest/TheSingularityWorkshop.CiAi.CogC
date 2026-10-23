@@ -9,11 +9,11 @@ Requires the .NET 8 SDK.
     dotnet build src/CiAi.CogC/CiAi.CogC.csproj --configuration Release
     dotnet run --project tests/CiAi.CogC.Tests/CiAi.CogC.Tests.csproj --configuration Release
 
-The offline checks cover correlation and target mismatches, foreign evidence hosts, malformed commit SHAs, conflicting conclusions, and explicitly unknown outcomes. CI runs these checks on development/master pushes and pull requests targeting development.
+The offline checks cover correlation, idempotency, contract-version, source, and target mismatches, foreign evidence hosts, malformed commit SHAs, conflicting conclusions, and explicitly unknown outcomes. CI runs these checks on development/master pushes and pull requests targeting development.
 
 ## 02 — Result contract
 
-An OperationResult carries request and correlation IDs, source and target repository identities, operation ID, state, conclusion, optional run ID, commit SHA, evidence URL, and UTC observation time. Validation compares the result to an ExpectedOperation supplied by the coordinator, not identity values trusted from a callback.
+An OperationResult carries request, correlation, and idempotency IDs; contract version; source and target repository identities, operation ID, state, conclusion, optional run ID, commit SHA, evidence URL, and UTC observation time. Validation compares the result to an ExpectedOperation supplied by the coordinator, not identity values trusted from a callback.
 
 Known states are pending, succeeded, failed, rejected, stale, and unknown. A claimed success requires a success conclusion, positive run ID, 40-character hexadecimal SHA, and a URL matching the target repository and run ID.
 
