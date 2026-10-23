@@ -16,6 +16,9 @@ public static class ResultValidation
         if (result is null) return new[] { "result.required" };
         if (!string.Equals(result.RequestId, expected.RequestId, StringComparison.Ordinal)) errors.Add("requestId.mismatch");
         if (!string.Equals(result.CorrelationId, expected.CorrelationId, StringComparison.Ordinal)) errors.Add("correlationId.mismatch");
+        if (!string.Equals(result.IdempotencyKey, expected.IdempotencyKey, StringComparison.Ordinal)) errors.Add("idempotencyKey.mismatch");
+        if (!string.Equals(result.ContractVersion, expected.ContractVersion, StringComparison.Ordinal)) errors.Add("contractVersion.mismatch");
+        if (!string.Equals(result.SourceRepository, expected.SourceRepository, StringComparison.OrdinalIgnoreCase)) errors.Add("sourceRepository.mismatch");
         if (!string.Equals(result.TargetRepository, expected.TargetRepository, StringComparison.OrdinalIgnoreCase)) errors.Add("targetRepository.mismatch");
         if (!string.Equals(result.OperationId, expected.OperationId, StringComparison.Ordinal)) errors.Add("operationId.mismatch");
         if (!KnownStates.Contains(result.State)) errors.Add("state.unknown");
