@@ -4,6 +4,8 @@ namespace CiAi.CogC;
 public sealed record OperationResult(
     string RequestId,
     string CorrelationId,
+    string IdempotencyKey,
+    string ContractVersion,
     string SourceRepository,
     string TargetRepository,
     string OperationId,
@@ -25,4 +27,4 @@ public static class ResultStates
 }
 
 /// <summary>Expected request identity from the trusted coordinator, not from the callback.</summary>
-public sealed record ExpectedOperation(string RequestId, string CorrelationId, string TargetRepository, string OperationId);
+public sealed record ExpectedOperation(string RequestId, string CorrelationId, string IdempotencyKey, string ContractVersion, string SourceRepository, string TargetRepository, string OperationId);
