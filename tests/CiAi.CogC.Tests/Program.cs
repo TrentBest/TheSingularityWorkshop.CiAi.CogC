@@ -8,6 +8,10 @@ Require(ResultValidation.Validate(good with { IdempotencyKey = "wrong" }, expect
 Require(ResultValidation.Validate(good with { ContractVersion = "2.0.0" }, expected).Contains("contractVersion.mismatch"), "wrong contract version must be rejected");
 Require(ResultValidation.Validate(good with { SourceRepository = "TrentBest/Other" }, expected).Contains("sourceRepository.mismatch"), "wrong source must be rejected");
 Require(ResultValidation.Validate(good with { TargetRepository = "TrentBest/Other", EvidenceUrl = "https://github.com/TrentBest/Other/actions/runs/123456" }, expected).Contains("targetRepository.mismatch"), "wrong target must be rejected");
+Require(ResultValidation.Validate(good with { SourceRepository = "TrentBest/../Other" }, expected).Contains("sourceRepository.invalid"), "non-canonical result source must be rejected");
+Require(ResultValidation.Validate(good with { TargetRepository = "TrentBest/Target/Extra" }, expected).Contains("targetRepository.invalid"), "multi-segment result target must be rejected");
+var malformedExpected = expected with { TargetRepository = "TrentBest/../Target" };
+Require(ResultValidation.Validate(good with { TargetRepository = "TrentBest/../Target" }, malformedExpected).Contains("expected.targetRepository.invalid"), "non-canonical expected target must be rejected");
 Require(ResultValidation.Validate(good with { EvidenceUrl = "https://example.com/actions/runs/123456" }, expected).Contains("success.evidence-invalid"), "foreign evidence host must be rejected");
 Require(ResultValidation.Validate(good with { HeadSha = "not-a-sha" }, expected).Contains("success.headSha-invalid"), "malformed SHA must be rejected");
 Require(ResultValidation.Validate(good with { Conclusion = "failure" }, expected).Contains("success.conclusion-required"), "success claim with failure conclusion must be rejected");
