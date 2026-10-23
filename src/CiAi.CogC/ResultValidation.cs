@@ -13,7 +13,11 @@ public static class ResultValidation
     {
         ArgumentNullException.ThrowIfNull(expected);
         var errors = new List<string>();
-        if (result is null) return new[] { "result.required" };
+        if (!IsValidRepository(expected.SourceRepository)) errors.Add("expected.sourceRepository.invalid");
+        if (!IsValidRepository(expected.TargetRepository)) errors.Add("expected.targetRepository.invalid");
+        if (result is null) return errors.Count == 0 ? new[] { "result.required" } : errors.Append("result.required").ToArray();
+        if (!IsValidRepository(result.SourceRepository)) errors.Add("sourceRepository.invalid");
+        if (!IsValidRepository(result.TargetRepository)) errors.Add("targetRepository.invalid");
         if (!string.Equals(result.RequestId, expected.RequestId, StringComparison.Ordinal)) errors.Add("requestId.mismatch");
         if (!string.Equals(result.CorrelationId, expected.CorrelationId, StringComparison.Ordinal)) errors.Add("correlationId.mismatch");
         if (!string.Equals(result.IdempotencyKey, expected.IdempotencyKey, StringComparison.Ordinal)) errors.Add("idempotencyKey.mismatch");
@@ -36,6 +40,17 @@ public static class ResultValidation
             errors.Add("failure.conclusion-conflict");
         }
         return errors;
+    }
+
+    private static bool IsValidRepository(string? repository)
+    {
+        if (string.IsNullOrWhiteSpace(repository) || repository.Length > 200)
+            return false;
+        var parts = repository.Split('/');
+        return parts.Length == 2 && parts.All(part =>
+            part.Length is > 0 and <= 100 &&
+            part is not "." and not ".." &&
+            part.All(character => char.IsAsciiLetterOrDigit(character) || character is '-' or '_' or '.'));
     }
 
     private static bool HasMatchingEvidence(OperationResult result)
