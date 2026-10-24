@@ -13,6 +13,7 @@ public sealed class CapabilityResult
         Digest = Hex(digest, 64, nameof(digest));
         SourceRevision = Hex(sourceRevision, 40, nameof(sourceRevision));
         if (contractVersion < 1) throw new ArgumentOutOfRangeException(nameof(contractVersion));
+        if (!Enum.IsDefined(status)) throw new ArgumentOutOfRangeException(nameof(status));
         if (providerRunId is <= 0) throw new ArgumentOutOfRangeException(nameof(providerRunId));
         Status = status;
         ContractVersion = contractVersion;

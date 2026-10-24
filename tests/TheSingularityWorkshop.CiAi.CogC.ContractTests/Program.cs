@@ -6,6 +6,7 @@ Check("wrong request is rejected", () => Assert(ResultCorrelator.Validate(expect
 Check("wrong provider and source revision are rejected", () => { var e = ResultCorrelator.Validate(expected, NewResult(provider: "TrentBest/Other", revision: new string('b', 40))); Assert(e.Contains("providerRepository.mismatch") && e.Contains("sourceRevision.mismatch"), "provenance mismatch missed"); });
 Check("missing result is explicit", () => Assert(ResultCorrelator.Validate(expected, null).Contains("result.required"), "missing result not reported"));
 Check("digest and source revision must be full hex", () => { Throws<ArgumentException>(() => NewResult(digest: "bad")); Throws<ArgumentException>(() => NewResult(revision: "main")); });
+Check("undefined result status is rejected", () => Throws<ArgumentOutOfRangeException>(() => NewResult(status: (CapabilityResultStatus)999)));
 Check("unknown and failed are not silently promoted to published", () => { Assert(NewResult(status: CapabilityResultStatus.Unknown).Status != CapabilityResultStatus.Published, "unknown promoted"); Assert(NewResult(status: CapabilityResultStatus.Failed).Status != CapabilityResultStatus.Published, "failure promoted"); });
 Console.WriteLine($"PASS: {passed} CogC contract checks.");
 void Check(string name, Action action) { action(); passed++; Console.WriteLine($"PASS {passed}: {name}"); }
