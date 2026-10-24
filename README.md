@@ -23,6 +23,13 @@ A URL that has the right shape is **not** proof that the run exists or succeeded
 
 No callback receiver, cryptographic callback authentication, persistent replay protection, history store, live transport, or CogB/CiAi integration is implemented yet.
 
-## 04 — Status
+## 04 — Documentation
+
+- [Gallery](Gallery.md): short overview and recipe entry point.
+- [ResultValidation class companion](src/CiAi.CogC/ResultValidation.md): purpose, contract, and trust boundary.
+- [ResultValidation UML and use case](docs/UML/ResultValidationUML.md): class relationships and coordinator validation flow.
+- [Readiness](docs/READINESS.md): implemented scope and remaining gaps.
+
+## 05 — Status
 
 **Readiness: 20%.** Initial result-validation contract, not integrated callbacks. See [READINESS.md](docs/READINESS.md).
