@@ -21,9 +21,15 @@ CogC compares request ID, provider repository, pinned source SHA, and contract v
 - Unknown, partial, failed, and cancelled results are never upgraded to success.
 - No network access, persistence, or execution.
 
+## Gallery
+
+See [Gallery.md](Gallery.md) for the quick tour and verification recipe.
+
 ## 04 — UML and use case
 
 See [ResultCorrelator UML and use case](docs/UML/ResultCorrelatorUML.md).
+
+See [ResultCorrelator class companion](src/TheSingularityWorkshop.CiAi.CogC/ResultCorrelator.md).
 
 ## 05 — Release status
 
