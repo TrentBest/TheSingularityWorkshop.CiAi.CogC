@@ -1,5 +1,7 @@
 # The Singularity Workshop CiAi.CogC
 
+[![Sith Policy](assets/sith-policy.svg)](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogC/actions/workflows/sith-policy.yml)
+
 **CogC correlates provider results with the exact request that authorized the work.** It validates identity and provenance metadata; it does not decide whether an output is semantically correct or accepted.
 
 ## 01 — See it in a minute
