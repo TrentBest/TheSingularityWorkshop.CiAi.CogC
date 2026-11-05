@@ -1,5 +1,6 @@
 # CiAi.CogC — Result and Correlation Boundary
 
+[![Sith Policy](assets/sith-policy.svg)](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogC/actions/workflows/sith-policy.yml)
 **Mission:** validate typed operation outcomes against coordinator-owned request identity and evidence.
 
 ## 01 — See it in a minute
