@@ -5,7 +5,7 @@
 
 ## 01 — See it in a minute
 
-Requires the .NET 8 SDK.
+Requires the .NET 10 SDK.
 
     dotnet build src/CiAi.CogC/CiAi.CogC.csproj --configuration Release
     dotnet run --project tests/CiAi.CogC.Tests/CiAi.CogC.Tests.csproj --configuration Release
